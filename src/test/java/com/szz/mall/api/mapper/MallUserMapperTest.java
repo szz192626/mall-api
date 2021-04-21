@@ -1,6 +1,7 @@
 package com.szz.mall.api.mapper;
 
 import com.szz.mall.api.entity.MallUser;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Slf4j
 @SpringBootTest
 class MallUserMapperTest {
     @Resource
@@ -24,6 +26,11 @@ class MallUserMapperTest {
     void selectAll(){
         List<MallUser> mallUsers = mallUserMapper.selectAll();
         System.out.println(mallUsers);
+    }
+    @Test
+    void selectByLoginName(){
+        MallUser mallUser = mallUserMapper.selectByLoginName("13951905171");
+        log.info("用户信息：" + mallUser);
     }
 
 }

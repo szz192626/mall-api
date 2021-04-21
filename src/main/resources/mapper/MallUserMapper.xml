@@ -31,6 +31,21 @@
     <select id="selectAll" resultType="com.szz.mall.api.entity.MallUser">
         select * from tb_mall_user
     </select>
+    <select id="selectByLoginName"
+            resultType="com.szz.mall.api.entity.MallUser">
+        select
+       <include refid="Base_Column_List" />
+           from tb_mall_user
+           where login_name = #{loginName} and is_deleted = 0
+    </select>
+    <select id="selectByLoginNameAndPasswd"
+            resultType="com.szz.mall.api.entity.MallUser">
+        select
+       <include refid="Base_Column_List"/>
+       from tb_mall_user
+       where login_name = #{loginName} and password_md5 = #{password} and
+             is_deleted = 0
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete from tb_mall_user

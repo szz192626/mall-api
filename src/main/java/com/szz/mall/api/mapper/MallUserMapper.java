@@ -1,6 +1,7 @@
 package com.szz.mall.api.mapper;
 
 import com.szz.mall.api.entity.MallUser;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,6 +23,21 @@ public interface MallUserMapper {
     int updateByPrimaryKey(MallUser record);
 
     List<MallUser> selectAll();
+
+    /**
+     * 根据登录名查询用户
+     * * @param loginName 登录名
+     * * @return 用户对象
+     */
+    MallUser selectByLoginName(String loginName);
+
+    /**
+     * 根据登录名和密码查询用户
+     * * @param loginName 登录名
+     * * @param password 密码
+     * * @return 用户对象
+     */
+    MallUser selectByLoginNameAndPasswd(@Param("loginName") String loginName, @Param("password") String password);
 
 }
 
