@@ -10,19 +10,56 @@ import java.util.List;
  */
 public interface MallUserMapper {
 
+    /**
+     * 根据主键删除记录
+     *
+     * @param id 主键
+     * @return int
+     */
     int deleteByPrimaryKey(Long id);
 
-    int insert(MallUser record);
+    /**
+     * 新增用户
+     *
+     * @param mallUser 入参
+     * @return 受影响的记录行数
+     */
 
-    int insertSelective(MallUser record);
+    int insert(MallUser mallUser);
 
+    /**
+     * 选择性保存数据——新增用户
+     *
+     * @param mallUser 入参
+     * @return 受影响的记录行数
+     */
+    int insertSelective(MallUser mallUser);
+
+    /**
+     * 根据主键查询记录
+     *
+     * @param id 主键
+     * @return MallUser
+     */
     MallUser selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(MallUser record);
+    /**
+     * 选择性更新
+     *
+     * @param mallUser 入参
+     * @return int
+     */
+    int updateByPrimaryKeySelective(MallUser mallUser);
 
-    int updateByPrimaryKey(MallUser record);
+    /**
+     * 更新用户信息
+     *
+     * @param mallUser 入参
+     * @return int
+     */
+    int updateByPrimaryKey(MallUser mallUser);
 
-    List<MallUser> selectAll();
+
 
     /**
      * 根据登录名查询用户

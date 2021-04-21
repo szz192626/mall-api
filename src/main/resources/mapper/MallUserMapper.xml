@@ -28,9 +28,123 @@
         from tb_mall_user
         where  user_id = #{userId,jdbcType=BIGINT} 
     </select>
-    <select id="selectAll" resultType="com.szz.mall.api.entity.MallUser">
-        select * from tb_mall_user
-    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from tb_mall_user
+        where user_id = #{userId,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insert" parameterType="com.szz.mall.api.entity.MallUser">
+        insert into tb_mall_user
+        ( user_id, nick_name, login_name
+        , password_md5, introduce_sign, address
+        , is_deleted, locked_flag, create_time)
+        values ( #{userId,jdbcType=BIGINT}, #{nickName,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}
+               , #{passwordMd5,jdbcType=VARCHAR}, #{introduceSign,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}
+               , #{isDeleted,jdbcType=TINYINT}, #{lockedFlag,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.szz.mall.api.entity.MallUser">
+        insert into tb_mall_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="nickName != null">
+                nick_name,
+            </if>
+            <if test="loginName != null">
+                login_name,
+            </if>
+            <if test="passwordMd5 != null">
+                password_md5,
+            </if>
+            <if test="introduceSign != null">
+                introduce_sign,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="lockedFlag != null">
+                locked_flag,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="nickName != null">
+                #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="loginName != null">
+                #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="passwordMd5 != null">
+                #{passwordMd5,jdbcType=VARCHAR},
+            </if>
+            <if test="introduceSign != null">
+                #{introduceSign,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="lockedFlag != null">
+                #{lockedFlag,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.szz.mall.api.entity.MallUser">
+        update tb_mall_user
+        <set>
+            <if test="nickName != null">
+                nick_name = #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="loginName != null">
+                login_name = #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="passwordMd5 != null">
+                password_md5 = #{passwordMd5,jdbcType=VARCHAR},
+            </if>
+            <if test="introduceSign != null">
+                introduce_sign = #{introduceSign,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=TINYINT},
+            </if>
+            <if test="lockedFlag != null">
+                locked_flag = #{lockedFlag,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.szz.mall.api.entity.MallUser">
+        update tb_mall_user
+        set nick_name      = #{nickName,jdbcType=VARCHAR},
+            login_name     = #{loginName,jdbcType=VARCHAR},
+            password_md5   = #{passwordMd5,jdbcType=VARCHAR},
+            introduce_sign = #{introduceSign,jdbcType=VARCHAR},
+            address        = #{address,jdbcType=VARCHAR},
+            is_deleted     = #{isDeleted,jdbcType=TINYINT},
+            locked_flag    = #{lockedFlag,jdbcType=TINYINT},
+            create_time    = #{createTime,jdbcType=TIMESTAMP}
+        where user_id = #{userId,jdbcType=BIGINT}
+    </update>
+
     <select id="selectByLoginName"
             resultType="com.szz.mall.api.entity.MallUser">
         select
@@ -38,6 +152,7 @@
            from tb_mall_user
            where login_name = #{loginName} and is_deleted = 0
     </select>
+
     <select id="selectByLoginNameAndPasswd"
             resultType="com.szz.mall.api.entity.MallUser">
         select
@@ -47,87 +162,9 @@
              is_deleted = 0
     </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete from tb_mall_user
-        where  user_id = #{userId,jdbcType=BIGINT} 
-    </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.szz.mall.api.entity.MallUser" useGeneratedKeys="true">
-        insert into tb_mall_user
-        ( user_id,nick_name,login_name
-        ,password_md5,introduce_sign,address
-        ,is_deleted,locked_flag,create_time
-        )
-        values (#{userId,jdbcType=BIGINT},#{nickName,jdbcType=VARCHAR},#{loginName,jdbcType=VARCHAR}
-        ,#{passwordMd5,jdbcType=VARCHAR},#{introduceSign,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR}
-        ,#{isDeleted,jdbcType=TINYINT},#{lockedFlag,jdbcType=TINYINT},#{createTime,jdbcType=TIMESTAMP}
-        ))
-    </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.szz.mall.api.entity.MallUser" useGeneratedKeys="true">
-        insert into tb_mall_user
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-                <if test="userId != null">userId,</if>
-                <if test="nickName != null">nickName,</if>
-                <if test="loginName != null">loginName,</if>
-                <if test="passwordMd5 != null">passwordMd5,</if>
-                <if test="introduceSign != null">introduceSign,</if>
-                <if test="address != null">address,</if>
-                <if test="isDeleted != null">isDeleted,</if>
-                <if test="lockedFlag != null">lockedFlag,</if>
-                <if test="createTime != null">createTime,</if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-                <if test="userId != null">user_id = #{userId,jdbcType=BIGINT},</if>
-                <if test="nickName != null">nick_name = #{nickName,jdbcType=VARCHAR},</if>
-                <if test="loginName != null">login_name = #{loginName,jdbcType=VARCHAR},</if>
-                <if test="passwordMd5 != null">password_md5 = #{passwordMd5,jdbcType=VARCHAR},</if>
-                <if test="introduceSign != null">introduce_sign = #{introduceSign,jdbcType=VARCHAR},</if>
-                <if test="address != null">address = #{address,jdbcType=VARCHAR},</if>
-                <if test="isDeleted != null">is_deleted = #{isDeleted,jdbcType=TINYINT},</if>
-                <if test="lockedFlag != null">locked_flag = #{lockedFlag,jdbcType=TINYINT},</if>
-                <if test="createTime != null">create_time = #{createTime,jdbcType=TIMESTAMP},</if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.szz.mall.api.entity.MallUser">
-        update tb_mall_user
-        <set>
-                <if test="nickName != null">
-                    nick_name = #{nickName,jdbcType=VARCHAR},
-                </if>
-                <if test="loginName != null">
-                    login_name = #{loginName,jdbcType=VARCHAR},
-                </if>
-                <if test="passwordMd5 != null">
-                    password_md5 = #{passwordMd5,jdbcType=VARCHAR},
-                </if>
-                <if test="introduceSign != null">
-                    introduce_sign = #{introduceSign,jdbcType=VARCHAR},
-                </if>
-                <if test="address != null">
-                    address = #{address,jdbcType=VARCHAR},
-                </if>
-                <if test="isDeleted != null">
-                    is_deleted = #{isDeleted,jdbcType=TINYINT},
-                </if>
-                <if test="lockedFlag != null">
-                    locked_flag = #{lockedFlag,jdbcType=TINYINT},
-                </if>
-                <if test="createTime != null">
-                    create_time = #{createTime,jdbcType=TIMESTAMP},
-                </if>
-        </set>
-        where   user_id = #{userId,jdbcType=BIGINT} 
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.szz.mall.api.entity.MallUser">
-        update tb_mall_user
-        set 
-            nick_name =  #{nickName,jdbcType=VARCHAR},
-            login_name =  #{loginName,jdbcType=VARCHAR},
-            password_md5 =  #{passwordMd5,jdbcType=VARCHAR},
-            introduce_sign =  #{introduceSign,jdbcType=VARCHAR},
-            address =  #{address,jdbcType=VARCHAR},
-            is_deleted =  #{isDeleted,jdbcType=TINYINT},
-            locked_flag =  #{lockedFlag,jdbcType=TINYINT},
-            create_time =  #{createTime,jdbcType=TIMESTAMP}
-        where   user_id = #{userId,jdbcType=BIGINT} 
-    </update>
+
+
+
+
+
 </mapper>
