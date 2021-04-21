@@ -22,11 +22,11 @@ class MallUserMapperTest {
         MallUser mallUser = mallUserMapper.selectByPrimaryKey(1L);
         System.out.println(mallUser);
     }
-    @Test
-    void selectAll(){
-        List<MallUser> mallUsers = mallUserMapper.selectAll();
-        System.out.println(mallUsers);
-    }
+//    @Test
+//    void selectAll(){
+//        List<MallUser> mallUsers = mallUserMapper.selectAll();
+//        System.out.println(mallUsers);
+//    }
     @Test
     void selectByLoginName(){
         MallUser mallUser = mallUserMapper.selectByLoginName("13951905171");

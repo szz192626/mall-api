@@ -1,6 +1,7 @@
 package com.szz.mall.api.controller.vo;
 
-import com.mqxu.mall.api.entity.MallGoodsCategory;
+
+import com.szz.mall.api.entity.MallGoodsCategory;
 import lombok.Data;
 
 import java.io.Serializable;

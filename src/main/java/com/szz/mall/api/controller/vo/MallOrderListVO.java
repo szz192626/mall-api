@@ -38,6 +38,6 @@ public class MallOrderListVO implements Serializable {
     private Date createTime;
 
     @ApiModelProperty("订单项列表")
-    private List<com.mqxu.mall.api.controller.vo.MallOrderItemVO> louMallOrderItemVos;
+    private List<com.szz.mall.api.controller.vo.MallOrderItemVO> louMallOrderItemVos;
 }
 

@@ -23,5 +23,5 @@ public class MallIndexCategoryVO implements Serializable {
     private String categoryName;
 
     @ApiModelProperty("二级分类列表")
-    private List<com.mqxu.mall.api.controller.vo.SecondLevelCategoryVO> secondLevelCategoryVos;
+    private List<com.szz.mall.api.controller.vo.SecondLevelCategoryVO> secondLevelCategoryVos;
 }
