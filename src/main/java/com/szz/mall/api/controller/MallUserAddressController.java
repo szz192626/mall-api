@@ -37,8 +37,7 @@ public class MallUserAddressController {
 
     @PostMapping("/address")
     @ApiOperation(value = "添加收货地址", notes = "添加收货地址")
-    public Result saveUserAddress(@RequestBody SaveMallUserAddressParam saveMallUserAddressParam,
-                                  @TokenToMallUser MallUser loginMallUser) {
+    public Result saveUserAddress(@RequestBody SaveMallUserAddressParam saveMallUserAddressParam, @TokenToMallUser MallUser loginMallUser) {
         MallUserAddress userAddress = new MallUserAddress();
         BaseBeanUtil.copyProperties(saveMallUserAddressParam, userAddress);
         userAddress.setUserId(loginMallUser.getUserId());
@@ -53,8 +52,7 @@ public class MallUserAddressController {
 
     @PutMapping("/address")
     @ApiOperation(value = "修改收货地址", notes = "修改收货地址")
-    public Result updateMallUserAddress(@RequestBody UpdateMallUserAddressParam updateMallUserAddressParam,
-                                        @TokenToMallUser MallUser loginMallUser) {
+    public Result updateMallUserAddress(@RequestBody UpdateMallUserAddressParam updateMallUserAddressParam, @TokenToMallUser MallUser loginMallUser) {
         MallUserAddress mallUserAddressById = mallUserAddressService.getMallUserAddressById(updateMallUserAddressParam.getAddressId());
         if (!loginMallUser.getUserId().equals(mallUserAddressById.getUserId())) {
             return ResultGenerator.genFailResult(ServiceResultEnum.REQUEST_FORBIDDEN_ERROR.getResult());
@@ -73,8 +71,7 @@ public class MallUserAddressController {
 
     @GetMapping("/address/{addressId}")
     @ApiOperation(value = "获取收货地址详情", notes = "传参为地址id")
-    public Result getMallUserAddress(@PathVariable("addressId") Long addressId,
-                                     @TokenToMallUser MallUser loginMallUser) {
+    public Result getMallUserAddress(@PathVariable("addressId") Long addressId, @TokenToMallUser MallUser loginMallUser) {
         MallUserAddress mallUserAddressById = mallUserAddressService.getMallUserAddressById(addressId);
         MallUserAddressVO louMallUserAddressVO = new MallUserAddressVO();
         BaseBeanUtil.copyProperties(mallUserAddressById, louMallUserAddressVO);
@@ -93,8 +90,7 @@ public class MallUserAddressController {
 
     @DeleteMapping("/address/{addressId}")
     @ApiOperation(value = "删除收货地址", notes = "传参为地址id")
-    public Result deleteAddress(@PathVariable("addressId") Long addressId,
-                                @TokenToMallUser MallUser loginMallUser) {
+    public Result deleteAddress(@PathVariable("addressId") Long addressId, @TokenToMallUser MallUser loginMallUser) {
         MallUserAddress mallUserAddressById = mallUserAddressService.getMallUserAddressById(addressId);
         if (!loginMallUser.getUserId().equals(mallUserAddressById.getUserId())) {
             return ResultGenerator.genFailResult(ServiceResultEnum.REQUEST_FORBIDDEN_ERROR.getResult());
