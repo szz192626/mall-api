@@ -24,7 +24,7 @@ class MallUserServiceTest {
 
     @Test
     void login() {
-        String login = mallUserService.login("18805176609", "4297f44b13955235245b2497399d7a93");
+        String login = mallUserService.login("17327711875", "96e79218965eb72c92a549dd5a330112");
         //返回了登录用户的token，会在tb_mall_user_token表生成一条token记录
         log.info(login);
     }
