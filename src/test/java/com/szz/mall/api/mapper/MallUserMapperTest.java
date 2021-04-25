@@ -19,8 +19,8 @@ class MallUserMapperTest {
 
     @Test
     void selectByPrimaryKey(){
-        MallUser mallUser = mallUserMapper.selectByPrimaryKey(1L);
-        System.out.println(mallUser);
+//        MallUser mallUser = mallUserMapper.selectByPrimaryKey(1L);
+//        System.out.println(mallUser);
     }
 //    @Test
 //    void selectAll(){
@@ -29,8 +29,8 @@ class MallUserMapperTest {
 //    }
     @Test
     void selectByLoginName(){
-        MallUser mallUser = mallUserMapper.selectByLoginName("13951905171");
-        log.info("用户信息：" + mallUser);
+//        MallUser mallUser = mallUserMapper.selectByLoginName("13951905171");
+//        log.info("用户信息：" + mallUser);
     }
 
 }

@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author mqxu
+ * @author szz
  * @description: Token解析
  */
 @Component
