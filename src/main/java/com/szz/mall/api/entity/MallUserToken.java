@@ -2,17 +2,28 @@ package com.szz.mall.api.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 
  * @TableName tb_mall_user_token
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@TableName("tb_mall_user_token")
 public class MallUserToken implements Serializable {
     /**
      * 用户主键id
      */
+    @TableId
     private Long userId;
 
     /**
