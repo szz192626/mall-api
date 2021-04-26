@@ -1,6 +1,7 @@
 package com.szz.mall.api.service;
 
 import com.szz.mall.api.controller.Param.MallUserUpdateParam;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author 囧态汗
@@ -26,6 +27,7 @@ public interface MallUserService {
      * @return String
      */
     String login(String loginName, String passwordMd5);
+
 
     /**
      * 用户信息修改

@@ -96,6 +96,7 @@ public class MallUserController {
     @ApiOperation(value = "修改用户信息", notes = "")
     public Result updateInfo(@RequestBody @ApiParam("用户信息") MallUserUpdateParam mallUserUpdateParam, @TokenToMallUser MallUser loginMallUser) {
         Boolean flag = mallUserService.updateUserInfo(mallUserUpdateParam, loginMallUser.getUserId());
+
         if (flag) {
             return ResultGenerator.genSuccessResult();
         } else {

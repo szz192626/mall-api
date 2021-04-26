@@ -26,6 +26,10 @@ public class MallUser implements Serializable {
      */
     @TableId
     private Long userId;
+    /**
+     * 头像
+     */
+    private String avatar;
 
     /**
      * 用户昵称

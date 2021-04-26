@@ -29,17 +29,17 @@ class MallUserServiceTest {
         log.info(login);
     }
 
-    @Test
-    void updateUserInfo() {
-        //修改46号用户信息,可修改的字段为MallUserUpdateParam的属性
-        MallUserUpdateParam mup = new MallUserUpdateParam();
-        mup.setNickName("新昵称");
-        mup.setPasswordMd5("e10adc3949ba59abbe56e057f20f883e");
-        mup.setIntroduceSign("开到荼蘼");
-        Boolean result = mallUserService.updateUserInfo(mup, 46L);
-        log.info(result.toString());
-        assertTrue(result);
-    }
+//    @Test
+//    void updateUserInfo() {
+//        //修改46号用户信息,可修改的字段为MallUserUpdateParam的属性
+//        MallUserUpdateParam mup = new MallUserUpdateParam();
+//        mup.setNickName("新昵称");
+//        mup.setPasswordMd5("e10adc3949ba59abbe56e057f20f883e");
+//        mup.setIntroduceSign("开到荼蘼");
+//        Boolean result = mallUserService.updateUserInfo(mup, 46L);
+//        log.info(result.toString());
+//        assertTrue(result);
+//    }
 
     @Test
     void logout() {
