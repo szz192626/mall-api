@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * @description: 订单项VO类
- * @author: mqxu
+ * @author: szz
  * @since: 2021-04-21
  **/
 @Data

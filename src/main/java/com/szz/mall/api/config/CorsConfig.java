@@ -36,6 +36,7 @@ public class CorsConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         // 对接口配置跨域设置
         source.registerCorsConfiguration("/**", buildConfig());
+
         return new CorsFilter(source);
     }
 }
