@@ -1,7 +1,10 @@
 package com.szz.mall.api.controller.vo;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -11,6 +14,9 @@ import java.io.Serializable;
  * @since: 2021-04-21
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class MallUserVO implements Serializable {
 
     @ApiModelProperty("用户昵称")

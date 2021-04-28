@@ -3,6 +3,8 @@ package com.szz.mall.api.service;
 import com.szz.mall.api.controller.Param.MallUserUpdateParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Map;
+
 /**
  * @author 囧态汗
  * @date 2021/4/21
@@ -26,7 +28,7 @@ public interface MallUserService {
      * @param passwordMd5 md5加密密码
      * @return String
      */
-    String login(String loginName, String passwordMd5);
+    Map<String,Object> login(String loginName, String passwordMd5);
 
 
     /**

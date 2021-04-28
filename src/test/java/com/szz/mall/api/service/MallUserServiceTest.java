@@ -22,12 +22,12 @@ class MallUserServiceTest {
         assertEquals("success", register);
     }
 
-    @Test
-    void login() {
-        String login = mallUserService.login("13388801111", "96e79218965eb72c92a549dd5a330112");
-        //返回了登录用户的token，会在tb_mall_user_token表生成一条token记录
-        log.info(login);
-    }
+//    @Test
+//    void login() {
+//        String login = mallUserService.login("13388801111", "96e79218965eb72c92a549dd5a330112");
+//        //返回了登录用户的token，会在tb_mall_user_token表生成一条token记录
+//        log.info(login);
+//    }
 
 //    @Test
 //    void updateUserInfo() {

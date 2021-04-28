@@ -2,8 +2,11 @@ package com.szz.mall.api.config;
 
 import com.szz.mall.api.common.Constants;
 import com.szz.mall.api.config.handler.TokenToMallUserMethodArgumentResolver;
+import com.szz.mall.api.interceptor.LogInterceptor;
+import com.szz.mall.api.interceptor.LoginInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -21,6 +24,10 @@ public class MallWebMvcConfigurer implements WebMvcConfigurer {
     @Resource
     private TokenToMallUserMethodArgumentResolver tokenToMallUserMethodArgumentResolver;
 
+    @Resource
+    private LogInterceptor logInterceptor;
+
+
     /**
      * TokenToMallUser 注解处理方法
      *
@@ -35,5 +42,16 @@ public class MallWebMvcConfigurer implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/upload/**").addResourceLocations("file:" + Constants.FILE_UPLOAD_DIC);
         registry.addResourceHandler("/goods-img/**").addResourceLocations("file:" + Constants.FILE_UPLOAD_DIC);
+    }
+    /**
+     * 注册拦截器
+     *
+     * @param registry 拦截器
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        //拦截所有请求，除了swagger
+        registry.addInterceptor(logInterceptor).addPathPatterns("/**")
+                .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**");
     }
 }

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.Map;
 
 /**
  * @author 囧态汗
@@ -37,25 +38,48 @@ public class MallUserController {
     private MallUserService mallUserService;
 
 
-    @PostMapping("/user/login")
-    @ApiOperation(value = "登录接口", notes = "返回token")
-    public Result<String> login(@RequestBody @Valid MallUserLoginParam mallUserLoginParam) {
-        if (!NumberUtil.isPhone(mallUserLoginParam.getLoginName())) {
-            return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_NAME_IS_NOT_PHONE.getResult());
-        }
-        String loginResult = mallUserService.login(mallUserLoginParam.getLoginName(), mallUserLoginParam.getPasswordMd5());
-
-        log.info("login api,loginName={},loginResult={}", mallUserLoginParam.getLoginName(), loginResult);
-
-        //登录成功
-        if (!StringUtils.isEmpty(loginResult) && loginResult.length() == Constants.TOKEN_LENGTH) {
-            Result result = ResultGenerator.genSuccessResult();
-            result.setData(loginResult);
-            return result;
-        }
-        //登录失败
-        return ResultGenerator.genFailResult(loginResult);
+//    @PostMapping("/user/login")
+//    @ApiOperation(value = "登录接口", notes = "返回token")
+//    public Result<String> login(@RequestBody @Valid MallUserLoginParam mallUserLoginParam) {
+//        if (!NumberUtil.isPhone(mallUserLoginParam.getLoginName())) {
+//            return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_NAME_IS_NOT_PHONE.getResult());
+//        }
+//        String loginResult = mallUserService.login(mallUserLoginParam.getLoginName(), mallUserLoginParam.getPasswordMd5());
+//
+//        log.info("login api,loginName={},loginResult={}", mallUserLoginParam.getLoginName(), loginResult);
+//
+//        //登录成功
+//        if (!StringUtils.isEmpty(loginResult) && loginResult.length() == Constants.TOKEN_LENGTH) {
+//            Result result = ResultGenerator.genSuccessResult();
+//            result.setData(loginResult);
+//            return result;
+//        }
+//        //登录失败
+//        return ResultGenerator.genFailResult(loginResult);
+//    }
+@PostMapping("/user/login")
+@ApiOperation(value = "登录接口", notes = "返回token")
+public Result login(@RequestBody @Valid MallUserLoginParam mallUserLoginParam) {
+    if (!NumberUtil.isPhone(mallUserLoginParam.getLoginName())) {
+        return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_NAME_IS_NOT_PHONE.getResult());
     }
+    Map<String, Object> loginResult = mallUserService.login(mallUserLoginParam.getLoginName(), mallUserLoginParam.getPasswordMd5());
+    //log.info("login api,loginName={},loginResult={}", mallUserLoginParam.getLoginName(), loginResult);
+    //登录成功
+    String token = loginResult.get("token").toString();
+    if (!token.isEmpty() && token.length() == Constants.TOKEN_LENGTH) {
+        //更新请求头中userId的值为当前登录用户的id，到拦截器继续执行后置操作，记录日志
+        //ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        //assert servletRequestAttributes != null;
+        //HttpServletRequest request = servletRequestAttributes.getRequest();
+        //request.setAttribute("userId", loginResult.get("userId").toString());
+        Result result = ResultGenerator.genSuccessResult();
+        result.setData(loginResult);
+        return result;
+    }
+    //登录失败
+    return ResultGenerator.genFailResult(loginResult.get("msg").toString());
+}
 
 
     @PostMapping("/user/logout")
